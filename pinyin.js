@@ -5,18 +5,23 @@
         var that = $(this);
         this.on('keypress', function(e){
             var currentVal = that.val();
-            // if last char is 1-4 and the character before that is in chararr
-            var secondLastChar = currentVal.slice(-1);
+            // note: currentVal does not include the character that was typed on this keypress
             var lastChar = String.fromCharCode(e.charCode);
 
-            console.log(lastChar);
-
             if(parseInt(lastChar) <= 4 && parseInt(lastChar) >= 1){
+                var secondLastChar = currentVal.slice(-1);
+                var uppercase = (secondLastChar === secondLastChar.toUpperCase());
+                secondLastChar = secondLastChar.toLowerCase();
+
                 var arr = ['a', 'e', 'i', 'o', 'u', 'v'];
                 if(arr.indexOf(secondLastChar) > -1){
                     var letter = arr[arr.indexOf(secondLastChar)];
                     var pincombo = letter + lastChar;
                     var pinyinChar = pinyin_map[pincombo];
+                    if(uppercase){
+                        pinyinChar = pinyinChar.toUpperCase();
+                    }
+
                     console.log(pincombo);
                     console.log(pinyinChar);
                     that.val(currentVal.slice(0, -1) + pinyinChar);
