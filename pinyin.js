@@ -10,20 +10,13 @@
 
             if(parseInt(lastChar) <= 4 && parseInt(lastChar) >= 1){
                 var secondLastChar = currentVal.slice(-1);
-                var uppercase = (secondLastChar === secondLastChar.toUpperCase());
-                secondLastChar = secondLastChar.toLowerCase();
 
                 var arr = ['a', 'e', 'i', 'o', 'u', 'v'];
                 if(arr.indexOf(secondLastChar) > -1){
                     var letter = arr[arr.indexOf(secondLastChar)];
                     var pincombo = letter + lastChar;
                     var pinyinChar = pinyin_map[pincombo];
-                    if(uppercase){
-                        pinyinChar = pinyinChar.toUpperCase();
-                    }
 
-                    console.log(pincombo);
-                    console.log(pinyinChar);
                     that.val(currentVal.slice(0, -1) + pinyinChar);
                     e.preventDefault();
                 }
